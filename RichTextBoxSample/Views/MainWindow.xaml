@@ -2,9 +2,22 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:extra="clr-namespace:RichTextBoxSample.CustomControls"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="350" Width="525">
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Vertical">
+                <Button Content="Add Server Command" Command="{Binding Add}" CommandParameter="SrvCmd"/>
+                <Button Content="Add Logging Info" Command="{Binding Add}" CommandParameter="LogAct"/>
+                <Button Content="Add Error" Command="{Binding Add}" CommandParameter="Err"/>
+            </StackPanel>
+        </Grid>
+        <!-- This is only nice part of this code we have known and pure binding -->
+        <extra:MessagingBox ItemsSource="{Binding BindableCollection}"/>
     </Grid>
 </Window>
